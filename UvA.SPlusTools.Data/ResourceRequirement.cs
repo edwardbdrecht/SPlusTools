@@ -54,12 +54,19 @@ namespace UvA.SPlusTools.Data
         /// <param name="number">Number of suitabilitiies, ignored if type is not Wildcard</param>
         public void Set(ResourceRequirementType type, int number = 0)
         {
-            if (type == ResourceRequirementType.None)
-                Activity.Object.SetResourceRequirement(ResourceIndex, (int)type);
-            else if (type == ResourceRequirementType.Wildcard)
-                Activity.Object.SetResourceRequirement(ResourceIndex, (int)type, number);
-            else
-                Activity.Object.SetResourceRequirement(ResourceIndex, (int)type, Resources.Count, Resources.Source);
+            switch (type)
+            {
+                case ResourceRequirementType.None:
+                    Activity.Object.SetResourceRequirement(ResourceIndex, (int)type);
+                    break;
+                case ResourceRequirementType.Wildcard:
+                case ResourceRequirementType.Preset:
+                    Activity.Object.SetResourceRequirement(ResourceIndex, (int)type, number);
+                    break;
+                default:
+                    Activity.Object.SetResourceRequirement(ResourceIndex, (int)type, Resources.Count, Resources.Source);
+                    break;
+            }
         }
 
         internal static int ResourceIndex
