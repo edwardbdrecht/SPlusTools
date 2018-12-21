@@ -60,8 +60,10 @@ namespace UvA.SPlusTools.Data
                     Activity.Object.SetResourceRequirement(ResourceIndex, (int)type);
                     break;
                 case ResourceRequirementType.Wildcard:
-                case ResourceRequirementType.Preset:
                     Activity.Object.SetResourceRequirement(ResourceIndex, (int)type, number);
+                    break;
+                case ResourceRequirementType.Preset:
+                    Activity.Object.SetResourceRequirement(ResourceIndex, (int)type, number, Resources.Source);
                     break;
                 default:
                     Activity.Object.SetResourceRequirement(ResourceIndex, (int)type, Resources.Count, Resources.Source);
